@@ -1,6 +1,6 @@
 import reflex as rx
 import requests
-
+from reflex_motion import motion
 
 class State(rx.State):
     name = "Bitcoin"
@@ -66,7 +66,7 @@ def index() -> rx.Component:
             width="100vw",
             height="225px",
             left="0px",
-            top="25px"
+            top="50px"
         ),
         rx.center(
             rx.vstack(
@@ -115,22 +115,33 @@ def index() -> rx.Component:
             width="100vw",
             height="429px",
             left="0px",
-            top="309px"
+            top="364px"
         ),
-        rx.image(
-            src="/arrow_back.png",
+        motion(
+            rx.image(
+                src="/arrow_back.png",
+                on_click=State.back
+            ),
             position="absolute",
             left="0px",
             top="287px",
-            on_click=State.back
+            while_hover={"scale": 1.2},
+            while_tap={"scale": 0.9},
+            transition={"type": "spring", "stiffness": 400, "damping": 17},
         ),
-        rx.image(
-            src="/arrow_forward.png",
+        motion(
+            rx.image(
+                src="/arrow_forward.png",
+                on_click= State.next
+            ),
             position="absolute",
             left="1909px",
             top="287px",
-            on_click= State.next
-        )
+            while_hover={"scale": 1.2},
+            while_tap={"scale": 0.9},
+            transition={"type": "spring", "stiffness": 400, "damping": 17},
+        ),
+        overflow="hidden"
     )
 
 
